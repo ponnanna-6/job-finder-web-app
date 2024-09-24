@@ -1,25 +1,28 @@
 //Importing modules
 const express = require('express')
-const moment = require('moment')
 const dotenv = require('dotenv')
-const fs = require('fs')
+const { incomingReqLogger } = require('./middlewares')
+const indexRouter = require('./routes/index')
+const userRouter = require('./routes/user')
+const { default: mongoose } = require('mongoose')
+const bodyParser = require('body-parser')
 
-//Init variables
 dotenv.config()
 const app = express()
 
-//Middlewares
-app.use((req,res,next)=>{
-    const date = moment().format("DD-MM-YYYY");
-    const time = moment(new Date()).format("HH:mm:ss:SSS");
-    fs.appendFileSync('log.txt', `(${date} ${time}) ${req.method} ${req.url}\n`)
-    next()
-})
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(incomingReqLogger)
+
+//routes
+app.use('/api/v1/', indexRouter)
+app.use('/api/v1/user/', userRouter)
 
 app.listen(process.env.PORT, (req, res)=>{
     console.log(`Server started on port ${process.env.PORT}`)
-})
-
-app.get('/', (req, res)=>{
-    res.send("HELLO WORLD")
+    mongoose.connect(process.env.MONGOOSE_URI_STRING).then(()=>{
+        console.log("Connected to: ", process.env.MONGOOSE_URI_STRING)
+    }).catch((error)=>{
+        console.log("DB connection error")
+    })
 })
