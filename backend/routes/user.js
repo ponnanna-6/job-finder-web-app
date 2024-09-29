@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt')
 const User = require('../schemas/user.schema')
 const bodyParser = require('body-parser')
 const router = express.Router()
+const jwt = require('jsonwebtoken')
 
+//register user
 router.post('/register', async (req, res)=>{
     const {name, email, password} = req.body
     const userExists = await User.findOne({email: email})
@@ -17,6 +19,7 @@ router.post('/register', async (req, res)=>{
     })
 })
 
+//login user
 router.post('/login', async (req, res)=>{
     try {
         const {email, password} = req.body
@@ -28,21 +31,25 @@ router.post('/login', async (req, res)=>{
         if(!compare){
             return res.status(400).json({message: "Incorrect password !!"})
         }
-        res.status(200).json({message: "Login successfully!"})
+        const payload = {id: user._id}
+        const token = jwt.sign(payload, process.env.JWT_TOKEN)
+        res.send(token)
     } catch (err) {
         res.status(400).json(err);
     }
 })
 
+//Fetch all users
 router.get('/', async (req, res) => {
     try {
-        const users = await User.find({select: "name"});
+        const users = await User.find({}).select('-password -_id -__v');
         res.status(200).json(users);
     } catch (err) {
         res.status(400).json(err);
     }
 });
 
+//Fetch user by email
 router.get('/:email', async (req, res) => {
     try {
         const {email} = req.params
