@@ -83,4 +83,11 @@ router.put('/:id',authMiddleware, async (req, res) => {
     }
 });
 
+//Search Jobs
+router.get('/search/:title' ,async (req, res) => {
+    const {title} = req.params
+    const job = await Job.find({name: new RegExp(title,"i")}).select('-description -_id -creator')
+    res.status(200).json(job);
+});
+
 module.exports = router;
