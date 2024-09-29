@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 const { incomingReqLogger } = require('./middlewares')
 const indexRouter = require('./routes/index')
 const userRouter = require('./routes/user')
+const jobRouter = require('./routes/job')
 const { default: mongoose } = require('mongoose')
 const bodyParser = require('body-parser')
 
@@ -17,6 +18,7 @@ app.use(incomingReqLogger)
 //routes
 app.use('/api/v1/', indexRouter)
 app.use('/api/v1/user/', userRouter)
+app.use('/api/v1/job/', jobRouter)
 
 app.listen(process.env.PORT, (req, res)=>{
     console.log(`Server started on port ${process.env.PORT}`)
