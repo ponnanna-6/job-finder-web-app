@@ -3,6 +3,8 @@ const Job = require('../schemas/job.schema');
 const router = express.Router();
 const {authMiddleware} = require('../middlewares/auth');
 const { isAuth } = require('../utils/utils');
+const {z} = require('zod')
+const {validateRequest} = require('zod-express-middleware')
 
 router.post('/create',authMiddleware, async (req, res) => {
     const { name, logo, position, salary, jobType, remote, description, about, skills, information } = req.body;
@@ -30,7 +32,11 @@ router.get('/' ,async (req, res) => {
     }
 });
 
-router.get('/:id' ,async (req, res) => {
+router.get('/:id' , validateRequest({
+    params: z.object({
+      id: z.string()
+    }),
+  }), async (req, res) => {
     try {
         const {id} = req.params
         const job = isAuth(req) 
