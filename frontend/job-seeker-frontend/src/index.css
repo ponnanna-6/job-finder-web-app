@@ -9,3 +9,8 @@ body {
   margin: 0;
   min-height: 100vh;
 }
+
+p {
+  font-size: large;
+  color: black;
+}
