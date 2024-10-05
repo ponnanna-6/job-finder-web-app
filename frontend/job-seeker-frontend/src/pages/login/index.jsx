@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Form from "../../components/form"
+import jobImage from "../../assets/job_finder_image.png"
 
 export default function Login(){
     const [formData, setFormData] = useState({
@@ -65,16 +66,19 @@ export default function Login(){
     }
 
     return(
-        <div>
-            <p>Login Page</p>
-            <Form
-                formFields={formFields}
-                error={error}
-                errorMessages={errorMessages}
-                onSubmit={onSubmit}
-            />
-            <img src="job"/>
+        <div style={{flexDirection: 'row', display: 'flex'}}>
+            <div style={{ width: '50vw', height: '100vh'}}>
+                <p>Already have an account ?</p>
+                <p>Your personal job finder</p>
+                <Form
+                    formFields={formFields}
+                    error={error}
+                    errorMessages={errorMessages}
+                    onSubmit={onSubmit}
+                />
+                <p>Don’t have an account? <b><u>Sign up</u></b></p>
+            </div>
+            <img src={jobImage} alt="Image" style={{ width: '50vw', height: '100vh' }}/>
         </div>
-
     )
 }

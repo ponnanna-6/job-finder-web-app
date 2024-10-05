@@ -1,5 +1,6 @@
 import {useState } from "react";
 import Form from "../../components/form"
+import jobImage from "../../assets/job_finder_image.png"
 
 export default function Register(){
     const [formData, setFormData] = useState({
@@ -100,14 +101,20 @@ export default function Register(){
     }
 
     return(
-        <div>
-            <p>Sign Up Page</p>
-            <Form
-                formFields = {formFields}
-                error = {error}
-                errorMessages = {errorMessages}
-                onSubmit = {onSubmit}
-            />
+        <div style={{flexDirection: 'row', display: 'flex'}}>
+            <div style={{ width: '50vw', height: '100vh'}}>
+                <p>Create an account</p>
+                <p>Your personal job finder</p>
+                <Form
+                    formFields={formFields}
+                    error={error}
+                    errorMessages={errorMessages}
+                    onSubmit={onSubmit}
+                />
+                <p>By creating an account, I agree to our terms of use and privacy policy</p>
+                <p>Already have an account? <b><u>Sign in</u></b></p>
+            </div>
+            <img src={jobImage} alt="Image" style={{ width: '50vw', height: '100vh' }}/>
         </div>
     )
 }
