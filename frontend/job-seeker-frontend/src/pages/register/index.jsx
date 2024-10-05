@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import Form from "../../components/form";
+import {useState } from "react";
+import Form from "../../components/form"
 
 export default function Register(){
     const [formData, setFormData] = useState({
@@ -93,7 +93,6 @@ export default function Register(){
         Object.keys(errorMessages).map((key) => {
             
             if(!errorMessages[key].isValid) {
-                console.log("Error keys: ", key)
                 errorMessages[key].onError()
             }
         })

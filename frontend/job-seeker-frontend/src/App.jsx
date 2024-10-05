@@ -7,7 +7,7 @@ import {
     JobsList,
     JobsDetail,
     NotFound
-} from '../pages'
+} from '../src/pages'
 
 export default function App(){
     return(
