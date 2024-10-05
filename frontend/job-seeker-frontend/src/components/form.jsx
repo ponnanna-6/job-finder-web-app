@@ -1,12 +1,16 @@
-function FormField({ value, name, placeholder, type, onChange }) {
+function FormField({ value, name, placeholder, label, type, onChange }) {
     return (
-        <input
-            value={value}
-            name={name}
-            placeholder={placeholder}
-            type={type}
-            onChange={onChange}
-        />
+        <div style={{display:'flex',flexDirection:"row"}}>
+            <input
+                id={name}
+                value={value}
+                name={name}
+                placeholder={placeholder}
+                type={type}
+                onChange={onChange}
+            />
+            {label ? (<label id={name} htmlFor={name}>{label}</label>) : null}
+        </div>
     );
 }
 
@@ -19,6 +23,7 @@ export default function Form({ formFields, error, errorMessages, onSubmit }) {
                         value={item.value}
                         name={item.name}
                         placeholder={item.placeholder}
+                        label={item.label}
                         type={item.type}
                         onChange={item.onChange}
                     />

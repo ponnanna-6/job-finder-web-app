@@ -8,14 +8,16 @@ export default function Register(){
         email: "",
         mobile: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        isChecked: false
     })
     const [error, setError] = useState({
         name: false,
         email: false,
         mobile: false,
         password: false,
-        currentPassword: false
+        currentPassword: false,
+        isChecked: false
     })
 
     const formFields = [
@@ -68,7 +70,17 @@ export default function Register(){
                 setFormData({...formData, confirmPassword: e.target.value})
                 setError((error) => ({...error, confirmPassword:false}))
             }
-        }
+        },
+        {
+            name: "checkbox",
+            type: "checkbox",
+            value: formData.isChecked,
+            label: "By creating an account, I agree to our terms of use and privacy policy",
+            onChange: (e) => {
+                setFormData({...formData, isChecked: e.target.checked})
+                setError((error) => ({...error, isChecked:false}))
+            }
+        },
     ]
     const errorMessages = {
         name: {
@@ -105,14 +117,21 @@ export default function Register(){
             onError: ()=>{
                 setError((error) => ({...error, confirmPassword:true}))
             }
+        }, 
+        isChecked:{
+            message: "Need to agree!",
+            isValid: formData.isChecked,
+            onError: ()=>{
+                setError((error) => ({...error, isChecked:true}))
+            }
         }
     }
 
     const onSubmit = (e) => {
         e.preventDefault()
         Object.keys(errorMessages).map((key) => {
-            
             if(!errorMessages[key].isValid) {
+                console.log("error key: ", key, errorMessages[key].message)
                 errorMessages[key].onError()
             }
         })
@@ -130,7 +149,6 @@ export default function Register(){
                     errorMessages={errorMessages}
                     onSubmit={onSubmit}
                 />
-                <p>By creating an account, I agree to our terms of use and privacy policy</p>
                 <p>Already have an account? <b><u>Sign in</u></b></p>
             </div>
             <img src={jobImage} alt="Image" style={{ width: '50vw', height: '100vh' }}/>
