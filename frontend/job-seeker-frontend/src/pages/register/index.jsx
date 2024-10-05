@@ -6,12 +6,14 @@ export default function Register(){
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        mobile: "",
         password: "",
         confirmPassword: ""
     })
     const [error, setError] = useState({
         name: false,
         email: false,
+        mobile: false,
         password: false,
         currentPassword: false
     })
@@ -35,6 +37,16 @@ export default function Register(){
             onChange: (e) => {
                 setFormData({...formData, email: e.target.value})
                 setError((error) => ({...error, email:false}))
+            }
+        },
+        {
+            name: "mobile",
+            type: "tel",
+            value: formData.mobile,
+            placeholder: "Enter your mobile number",
+            onChange: (e) => {
+                setFormData({...formData, mobile: e.target.value})
+                setError((error) => ({...error, mobile:false}))
             }
         },
         {
@@ -71,6 +83,13 @@ export default function Register(){
             isValid: formData.email.length>0,
             onError: ()=>{
                 setError((error) => ({...error, email:true}))
+            } 
+        },
+        mobile:{
+            message: "Phone number is required",
+            isValid: formData.mobile.length>0,
+            onError: ()=>{
+                setError((error) => ({...error, mobile:true}))
             } 
         },
         password:{
