@@ -9,15 +9,15 @@ export default function Register(){
         mobile: "",
         password: "",
         confirmPassword: "",
-        isChecked: false
+        checkBox: false
     })
     const [error, setError] = useState({
         name: false,
         email: false,
         mobile: false,
         password: false,
-        currentPassword: false,
-        isChecked: false
+        confirmPassword: false,
+        checkBox: false
     })
 
     const formFields = [
@@ -72,13 +72,13 @@ export default function Register(){
             }
         },
         {
-            name: "checkbox",
+            name: "checkBox",
             type: "checkbox",
-            value: formData.isChecked,
+            value: formData.checkBox,
             label: "By creating an account, I agree to our terms of use and privacy policy",
             onChange: (e) => {
-                setFormData({...formData, isChecked: e.target.checked})
-                setError((error) => ({...error, isChecked:false}))
+                setFormData({...formData, checkBox: e.target.checked})
+                setError((error) => ({...error, checkBox:false}))
             }
         },
     ]
@@ -118,11 +118,11 @@ export default function Register(){
                 setError((error) => ({...error, confirmPassword:true}))
             }
         }, 
-        isChecked:{
+        checkBox:{
             message: "Need to agree!",
-            isValid: formData.isChecked,
+            isValid: formData.checkBox,
             onError: ()=>{
-                setError((error) => ({...error, isChecked:true}))
+                setError((error) => ({...error, checkBox:true}))
             }
         }
     }
@@ -131,11 +131,9 @@ export default function Register(){
         e.preventDefault()
         Object.keys(errorMessages).map((key) => {
             if(!errorMessages[key].isValid) {
-                console.log("error key: ", key, errorMessages[key].message)
                 errorMessages[key].onError()
             }
         })
-        console.log("Error List: ", error)
     }
 
     return(
