@@ -1,6 +1,7 @@
 import {useState } from "react";
 import Form from "../../components/form"
 import jobImage from "../../assets/job_finder_image.png"
+import { registerUser } from "../../services/auth";
 
 export default function Register(){
     const [formData, setFormData] = useState({
@@ -129,16 +130,27 @@ export default function Register(){
 
     const onSubmit = (e) => {
         e.preventDefault()
+        let isError = false
         Object.keys(errorMessages).map((key) => {
             if(!errorMessages[key].isValid) {
+                isError = true
                 errorMessages[key].onError()
             }
         })
+        if(!isError){
+            const res = registerUser({
+                name: formData.name,
+                email: formData.email,
+                mobile: formData.mobile,
+                password: formData.password
+            })
+            console.log(res)
+        }
     }
 
     return(
         <div style={{flexDirection: 'row', display: 'flex'}}>
-            <div style={{ width: '50vw', height: '100vh'}}>
+            <div style={{ width: '50vw', height: '100vh', marginLeft: "50px"}}>
                 <p>Create an account</p>
                 <p>Your personal job finder</p>
                 <Form

@@ -8,6 +8,7 @@ function FormField({ value, name, placeholder, label, type, onChange }) {
                 placeholder={placeholder}
                 type={type}
                 onChange={onChange}
+                style={{height:"20px", marginBottom: "10px"}}
             />
             {label ? (<label id={name} htmlFor={name}>{label}</label>) : null}
         </div>
