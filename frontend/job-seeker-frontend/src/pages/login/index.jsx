@@ -1,8 +1,11 @@
 import { useState } from "react"
 import Form from "../../components/form"
 import jobImage from "../../assets/job_finder_image.png"
+import { useNavigate} from "react-router-dom"
+import { loginUser } from "../../services/auth"
 
 export default function Login(){
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -22,7 +25,7 @@ export default function Login(){
             }
         }, 
         password: {
-            message: "Incorrect password",
+            message: "Please enter password",
             isValid: formData.password.length > 0,
             onError: () => {
                 setError((error)=>({...error, password: true}))
@@ -53,16 +56,28 @@ export default function Login(){
         }
     ]
     
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
         e.preventDefault()
+        let isError = false
         Object.keys(errorMessages).map((key) => {
-            
             if(!errorMessages[key].isValid) {
-                console.log("Error keys: ", key)
+                isError = true
                 errorMessages[key].onError()
             }
         })
-        console.log("Error List: ", error)
+        if(!isError){
+            const res = await loginUser({
+                email: formData.email,
+                password: formData.password
+            })
+            if(res.status == 200) {
+                alert(res.data.message)
+                localStorage.setItem('token', res.data.token)
+                navigate('/')
+            } else{
+                alert(res.message)
+            }
+        }
     }
 
     return(
@@ -76,7 +91,12 @@ export default function Login(){
                     errorMessages={errorMessages}
                     onSubmit={onSubmit}
                 />
-                <p>Don’t have an account? <b><u>Sign up</u></b></p>
+                <p>
+                    Don’t have an account? 
+                    <b><u onClick={()=>navigate('/register')} style={{cursor: 'pointer'}}>
+                        Sign up
+                    </u></b>
+                </p>
             </div>
             <img src={jobImage} alt="Image" style={{ width: '50vw', height: '100vh' }}/>
         </div>

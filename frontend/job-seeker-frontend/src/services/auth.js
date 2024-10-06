@@ -1,7 +1,38 @@
 import axios from "axios";
-const URL = "http://localhost:5000/api/v1"
 
-export const registerUser = (data) => {
-    const res = axios.post(`${URL}/user/register`, data)
-    return res
-}
+export const registerUser = async (data) => {
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/user/register`, data);
+      return {
+        status: res.status,
+        message: res.data.message
+      };
+    } catch (error) {
+      if (error.response) {
+        console.log("Error Response:", error.response.data);
+      }
+      return {
+        status: error.status,
+        message: error.response.data.message
+      };
+    }
+  };
+
+  export const loginUser = async (data) => {
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/user/login`, data);
+      return {
+        status: res?.status,
+        data: res?.data
+      };
+    } catch (error) {
+      if (error.response) {
+        console.log("Error Response:", error.response.data);
+      }
+      return {
+        status: error.status,
+        message: error.response.data.message
+      };
+    }
+  };
+  

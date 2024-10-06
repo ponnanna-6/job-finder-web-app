@@ -2,8 +2,10 @@ import {useState } from "react";
 import Form from "../../components/form"
 import jobImage from "../../assets/job_finder_image.png"
 import { registerUser } from "../../services/auth";
+import {useNavigate} from "react-router-dom"
 
 export default function Register(){
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -128,7 +130,7 @@ export default function Register(){
         }
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
         e.preventDefault()
         let isError = false
         Object.keys(errorMessages).map((key) => {
@@ -138,13 +140,18 @@ export default function Register(){
             }
         })
         if(!isError){
-            const res = registerUser({
+            const res = await registerUser({
                 name: formData.name,
                 email: formData.email,
                 mobile: formData.mobile,
                 password: formData.password
             })
-            console.log(res)
+            if(res.status == 200) {
+                alert(res.message)
+                navigate('/login')
+            } else{
+                alert(res.message)
+            }
         }
     }
 
@@ -159,7 +166,12 @@ export default function Register(){
                     errorMessages={errorMessages}
                     onSubmit={onSubmit}
                 />
-                <p>Already have an account? <b><u>Sign in</u></b></p>
+                <p>
+                    Already have an account? 
+                    <b><u onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>
+                        Sign in
+                    </u></b>
+                </p>
             </div>
             <img src={jobImage} alt="Image" style={{ width: '50vw', height: '100vh' }}/>
         </div>
