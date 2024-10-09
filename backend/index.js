@@ -12,10 +12,10 @@ const cors = require('cors')
 dotenv.config()
 const app = express()
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(incomingReqLogger)
-app.use(cors())
 
 //routes
 app.use('/api/v1/', indexRouter)
