@@ -19,3 +19,8 @@ export const isEditable = (id) => {
         return false
     }
 }
+
+export const tokenAvailable = () => {
+    const token = localStorage.getItem('token')
+    return token ? true : false
+}

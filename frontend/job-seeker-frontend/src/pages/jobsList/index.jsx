@@ -1,8 +1,12 @@
+import Header from "../../components/header";
 import JobItem from "../../components/jobItem";
+import { tokenAvailable } from "../../helper";
 import { getAllJobData } from "../../services/jobs";
 import { useState, useEffect} from "react"
+import { useNavigate} from "react-router-dom"
 
 export default function JobsList(){
+    const navigate = useNavigate()
     const [jobData, setJobData] = useState([]);
     const [loading, setLoading] = useState(true)
 
@@ -16,11 +20,21 @@ export default function JobsList(){
         getData()
     }, []);
 
+    const handleLogout = () => {
+        navigate('/login')
+        localStorage.removeItem('token')
+    }
+
     return(
         loading 
             ? (<p> Loading... </p>)
             : (<> 
-                <div>Header</div>
+                <Header 
+                    isLogged={tokenAvailable()}
+                    handleLogout={handleLogout}
+                    handleLogin={()=>{navigate('/login')}}
+                    handleRegister={()=>{navigate('/register')}}
+                />
                 <div>Filter component</div>
                 <div>
                     {Object.keys(jobData).map((index, key) => {
