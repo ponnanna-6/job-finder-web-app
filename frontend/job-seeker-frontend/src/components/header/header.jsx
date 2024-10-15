@@ -1,6 +1,6 @@
-import styles from './index.module.css'
-import shape1 from '../assets/shape1.png';
-import shape2 from '../assets/shape2.png';
+import styles from './header.module.css'
+import shape1 from '../../assets/shape1.png';
+import shape2 from '../../assets/shape2.png';
 
 export default function Header({isLogged, handleLogout, handleLogin, handleRegister})  {
     return (

@@ -1,9 +1,10 @@
-import Header from "../../components/header";
-import JobItem from "../../components/jobItem";
+import Header from "../../components/header/header";
+import JobItem from "../../components/jobItem/jobItem";
 import { tokenAvailable } from "../../helper";
 import { getAllJobData } from "../../services/jobs";
 import { useState, useEffect} from "react"
 import { useNavigate} from "react-router-dom"
+import styles from "./index.module.css"
 
 export default function JobsList(){
     const navigate = useNavigate()
@@ -36,7 +37,7 @@ export default function JobsList(){
                     handleRegister={()=>{navigate('/register')}}
                 />
                 <div>Filter component</div>
-                <div>
+                <div className={styles.parent}>
                     {Object.keys(jobData).map((index, key) => {
                         return <JobItem key={index} data={jobData[key]}/>
                     })}

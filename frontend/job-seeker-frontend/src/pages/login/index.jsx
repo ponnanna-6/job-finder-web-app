@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Form from "../../components/form"
+import Form from "../../components/form/form"
 import jobImage from "../../assets/job_finder_image.png"
 import { useNavigate} from "react-router-dom"
 import { loginUser } from "../../services/auth"

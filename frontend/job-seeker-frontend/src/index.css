@@ -1,3 +1,5 @@
+@import '../src/colors/colors.css';
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
