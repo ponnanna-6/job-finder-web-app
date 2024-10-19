@@ -5,6 +5,7 @@ import { getAllJobData } from "../../services/jobs";
 import { useState, useEffect} from "react"
 import { useNavigate} from "react-router-dom"
 import styles from "./index.module.css"
+import FilterComponent from "../../components/filter/filter";
 
 export default function JobsList(){
     const navigate = useNavigate()
@@ -36,7 +37,9 @@ export default function JobsList(){
                     handleLogin={()=>{navigate('/login')}}
                     handleRegister={()=>{navigate('/register')}}
                 />
-                <div>Filter component</div>
+                <div className={styles.filterParent}>
+                    <FilterComponent/>
+                </div>
                 <div className={styles.parent}>
                     {Object.keys(jobData).map((index, key) => {
                         return <JobItem key={index} data={jobData[key]}/>

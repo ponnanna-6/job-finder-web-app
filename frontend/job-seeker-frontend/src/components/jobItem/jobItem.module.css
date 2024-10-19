@@ -58,10 +58,22 @@ p {
     height: 30px;
     width: 100px;
     background-color: var(--primary-color);
-    border-radius: 10px;
+    color: #FFFFFF;
     border: none;
     margin-bottom: 0.5rem;
-    align-self: flex-end; /* Align the button to the top of the column */
+    align-self: flex-end;
+    cursor: pointer;
+}
+.editButton {
+    height: 30px;
+    width: 100px;
+    background-color: #FFFFFF;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    margin-bottom: 0.5rem;
+    margin-right: 0.2rem;
+    align-self: flex-end;
+    cursor: pointer;
 }
 
 .rightSide {
@@ -76,4 +88,9 @@ p {
     flex-direction: row;
     justify-content: space-between;
     flex-grow: 1; /* Allow rowItems to grow in space */
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
 }

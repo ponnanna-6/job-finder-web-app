@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { isEditable } from "../../helper"
 import styles from './jobItem.module.css'
 
@@ -19,7 +20,10 @@ export default function JobItem({data}) {
                         return <p key={index}className={styles.skill}>{skill}</p>
                     })}
                 </div>
-                <button className={styles.viewButton}>View Details</button>
+                <div className={styles.buttonContainer}>
+                    {isEditable(data?.creator) && <button className={styles.editButton}>Edit Job</button>}
+                    <button className={styles.viewButton}>View Details</button>
+                </div>
             </div>
         </div>
     );
