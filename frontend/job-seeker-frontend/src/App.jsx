@@ -18,6 +18,7 @@ export default function App(){
                 <Route path='/register' element={<Register/>}></Route>
                 <Route path='/addjob' element={<AddJob/>}></Route>
                 <Route path='/editjob' element={<EditJob/>}></Route>
+                <Route path='/list/:id' element={<JobsDetail/>}></Route>
                 <Route path='/list' element={<JobsList/>}>
                     <Route index element={<JobsList/>}/>
                     <Route path=':id' element={<JobsDetail/>}/>

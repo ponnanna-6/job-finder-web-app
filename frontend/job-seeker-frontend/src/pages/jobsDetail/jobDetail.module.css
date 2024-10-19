@@ -1,0 +1,122 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.jobDataHeaderContainer {
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    height: auto;
+    margin: 1rem;
+    width: 80vw;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.editButton {
+    height: 30px;
+    width: 100px;
+    background-color: var(--primary-color);;
+    color: #FFFFFF;
+    border: 0px;
+    margin-bottom: 0.5rem;
+    margin-right: 0.2rem;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.headerTextStyle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.smallTextStyle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 500;
+    text-align: center;
+    color: #999999;
+    line-height: 0.2rem;
+}
+
+.mediumTextStyle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #999999;
+    line-height: 1.2rem;
+}
+
+.skills {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #999999;
+    line-height: 1.2rem;
+    background-color: #FFEFEF;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+}
+
+.bigTextStyle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    color: #000000;
+}
+
+.jobDataDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    margin: 1rem;
+    width: 80vw;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #FFEFEF;
+}
+
+.detailRow1 {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+}
+
+.detailRow2 {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    justify-content: space-between;
+}
+
+.detailRow3 {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.detailRow4 {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

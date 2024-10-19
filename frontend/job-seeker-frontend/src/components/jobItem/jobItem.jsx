@@ -1,8 +1,17 @@
 import { useEffect } from "react";
-import { isEditable } from "../../helper"
+import { isEditable, tokenAvailable } from "../../helper"
 import styles from './jobItem.module.css'
+import { useNavigate} from "react-router";
 
 export default function JobItem({data}) {
+    const navigate = useNavigate()
+    const onViewClick = () => {
+        if(tokenAvailable()) {    
+            navigate(`/list/${data?._id}`)
+        } else {
+            navigate(`/login`)
+        }
+    }
     return (
         <div className={styles.container}>
             <img className={styles.logo} src={data?.logo} alt={data?.name}/>
@@ -22,7 +31,7 @@ export default function JobItem({data}) {
                 </div>
                 <div className={styles.buttonContainer}>
                     {isEditable(data?.creator) && <button className={styles.editButton}>Edit Job</button>}
-                    <button className={styles.viewButton}>View Details</button>
+                    <button className={styles.viewButton} onClick={onViewClick}>View Details</button>
                 </div>
             </div>
         </div>
