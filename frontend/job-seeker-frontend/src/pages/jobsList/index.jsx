@@ -30,22 +30,23 @@ export default function JobsList(){
     return(
         loading 
             ? (<p> Loading... </p>)
-            : (<> 
-                <Header 
-                    isLogged={tokenAvailable()}
-                    handleLogout={handleLogout}
-                    handleLogin={()=>{navigate('/login')}}
-                    handleRegister={()=>{navigate('/register')}}
-                />
-                <div className={styles.filterParent}>
-                    <FilterComponent/>
+            : (
+                <div className={styles.container}>
+                    <Header 
+                        isLogged={tokenAvailable()}
+                        handleLogout={handleLogout}
+                        handleLogin={()=>{navigate('/login')}}
+                        handleRegister={()=>{navigate('/register')}}
+                    />
+                    <div className={styles.filterParent}>
+                        <FilterComponent/>
+                    </div>
+                    <div className={styles.parent}>
+                        {Object.keys(jobData).map((index, key) => {
+                            return <JobItem key={index} data={jobData[key]}/>
+                        })}
+                    </div>
                 </div>
-                <div className={styles.parent}>
-                    {Object.keys(jobData).map((index, key) => {
-                        return <JobItem key={index} data={jobData[key]}/>
-                    })}
-                </div>
-            </>)
-        
+            )
     )
 }

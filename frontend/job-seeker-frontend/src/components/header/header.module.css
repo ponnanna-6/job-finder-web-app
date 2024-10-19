@@ -1,27 +1,41 @@
 .header {
     background-color: #ED5353;
     color: white;
-    margin: 0vh 0vw;
-    padding: 3vh 5vw;
+    margin: 0; /* Remove margin */
+    padding: 1rem 5vw; /* Adjust padding if necessary */
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 0px 0px 50px 50px;
+    position: fixed;
+    top: 0; /* Fixes header to top */
+    left: 0; /* Aligns it to the left */
+    right: 0; /* Aligns it to the right */
+    height: 70px; /* Define a height for the header */
+    z-index: 1000; /* Ensure it's on top */
 }
 
 .shape1 {
     position: absolute;
-    top: -3vh;
+    top: -40px; /* Adjust based on header height */
     left: 40vw;
 }
 
 .shape2 {
     height: 17.5vh;
     position: absolute;
-    top: -3vh;
+    top: -40px; /* Adjust based on header height */
     left: 70vw;
 }
 
+.btnGroup {
+    width: 15%;
+    display: flex;
+    align-items: center; /* Align buttons vertically */
+    justify-content: space-around; /* Space buttons evenly */
+    margin-top: 0.5rem;
+    z-index: 10;
+}
 
 button.login {
     background-color: transparent;
@@ -30,7 +44,6 @@ button.login {
     padding: 0.5rem 1rem;
     border-radius: 6px;
     font-weight: 600;
-    z-index: 1;
     cursor: pointer;
 }
 
@@ -41,200 +54,5 @@ button.register {
     padding: 0.5rem 1rem;
     border-radius: 6px;
     font-weight: 600;
-    z-index: 1;
     cursor: pointer;
-}
-
-button.filter {
-    background: #ED5353;
-    border-radius: 6px;
-    padding: 0.7em 2em;
-    border: none;
-    color: white;
-}
-
-button.clear {
-    background: white;
-    border-radius: 6px;
-    padding: 0.7em 2em;
-    border: none;
-    color: #ED5353;
-    font-weight: 600;
-}
-
-button.job {
-    background: #ED5353;
-    border-radius: 6px;
-    padding: 0.7em 2em;
-    border: none;
-    color: white;
-}
-
-
-
-input {
-    all: unset;
-}
-
-select {
-    background-color: unset;
-    font-size: 1rem;
-    color: darkgray;
-    border: 2px solid lightgray;
-    padding: 1.5vh 2vw;
-    border-radius: 6px;
-}
-
-.container {
-    width: 75vw;
-    margin: auto;
-    margin-top: 5vh;
-    top: 25vh;
-    left: 10vw;
-    margin-right: auto;
-    box-sizing: border-box;
-    padding: 2rem 1rem;
-    background-color: white;
-    /* box-shadow: 0px 4px 23px 2px rgba(0, 0, 0, 0.1); */
-    box-shadow: 0px 0px 22px 4px #FF202040;
-    z-index: 2;
-    text-align: center;
-}
-
-
-.containerTop {
-    text-align: left;
-    margin-bottom: 2rem;
-    /* padding: 0 5vw; */
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
-    border: 2px solid lightgray;
-    border-radius: 6px;
-    text-indent: 5px;
-}
-
-.containerBottom {
-    padding: 0vh 4vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.inputTop {
-    width: 100%;
-}
-
-.inputSelect {
-    width: 12rem;
-}
-
-.list {
-    width: 75vw;
-    margin: 6vh auto 12px auto;
-    background-color: white;
-    box-shadow: 0px 0px 22px 4px #FF202040;
-    border-left: 5px solid red;
-    padding: 1rem 1rem;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.listLeft {
-    display: flex;
-    align-items: start;
-}
-
-.infoLeft {
-    margin: 0rem 1rem;
-}
-
-.position {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 0px;
-}
-
-.extraInfo {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 0.5rem;
-}
-
-.greyText {
-    color: #9C9C9C;
-}
-
-.redText {
-    color: #ED5353;
-}
-
-.skills {
-    display: flex;
-    gap: 5px;
-}
-
-.skill {
-    background-color: #FFEEEE;
-    color: black;
-    padding: 0.6rem;
-    border-radius: 3px;
-}
-
-.btnGroup {
-    width: 15%;
-    display: flex;
-    margin-top: 0.5rem;
-    gap: 10px;
-    justify-content: space-around;
-}
-
-.btnGroup2 {
-    width: 100%;
-    display: flex;
-    margin-top: 0.5rem;
-    justify-content: flex-end;
-}
-
-.view {
-    background-color: #ED5353;
-    color: #FFEEEE;
-    border: 0px;
-    border-radius: 6px;
-    margin-top: 1vh;
-    /* padding: 0.5rem 2rem; */
-    font-weight: 600;
-}
-
-/* .bottom{
-    position: fixed;
-    top: 40vh;
-    left: 10vw;
-    height: fit-content;
-    overflow: scroll;
-} */
-
-
-.chip {
-    padding-left: 4px;
-    box-sizing: border-box;
-    background: #FFEEEE;
-    border-radius: 0px 1px 1px 0px;
-}
-
-.cross {
-    background-color: #ED5353;
-    /* font-weight: 600; */
-    margin-left: 5px;
-    padding: 1px 5px;
-    color: white;
-    border-radius: 0px 1px 1px 0px;
-}
-
-.logo {
-    height: 4rem;
-    width: 4rem;
-    border-radius: 12px;
 }

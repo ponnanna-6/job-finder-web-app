@@ -1,12 +1,16 @@
 .container {
     display: flex;
     flex-direction: column;
+    background-color: #FFEFEF;
+    margin: 0;
+    min-height: 100vh;
 }
 
 .container2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 15vh;
 }
 
 .jobDataHeaderContainer {
@@ -84,12 +88,6 @@
     width: 80vw;
     justify-content: space-between;
     padding: 1rem;
-}
-
-body, html {
-    margin: 0;
-    padding: 0;
-    background-color: #FFEFEF;
 }
 
 .detailRow1 {

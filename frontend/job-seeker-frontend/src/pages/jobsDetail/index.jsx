@@ -10,21 +10,25 @@ export default function JobsDetail(){
     const params = useParams()
     const [jobData, setJobData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [isError, setIsError] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
         const getData = async () => {   
-            await getJobById(params.id).then(res => {
-                setJobData(res)
-                setIsLoading(false)
-            })
+            setIsLoading(true);
+            setIsError(false);
+            try {
+                const res = await getJobById(params.id);
+                setJobData(res);
+            } catch (error) {
+                console.error("Error fetching job data:", error);
+                setIsError(true);
+            } finally {
+                setIsLoading(false);
+            }
         }
         getData()
-    },[])
-
-    useEffect(() => {
-        console.log("JOB SCREEN: ", jobData)
-    }, [jobData])
+    },[params.id])
 
     const handleLogout = () => {
         navigate('/login')
@@ -32,8 +36,8 @@ export default function JobsDetail(){
     }
 
     return(
-        isLoading  
-            ? (<p>...Loading</p>)
+        isLoading || isError  
+            ? (isError ? <p className={styles.bigTextStyle}>Something went wrong</p>: <p className={styles.bigTextStyle}>...Loading</p>)
             : (<div className={styles.container}>
                     <Header
                         isLogged={tokenAvailable()}
