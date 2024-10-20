@@ -37,9 +37,10 @@ export const addJob = async (jobData) => {
 };
 
 
-export const editJob = async (id) => {
+export const editJob = async (id, data) => {
   const headers = addTokenToHeader({headers:{}})
   const res = await axios.put(`${import.meta.env.VITE_BASE_URL}/api/v1/job/${id}`, 
+    data,
     {headers}
   );
   return res.data

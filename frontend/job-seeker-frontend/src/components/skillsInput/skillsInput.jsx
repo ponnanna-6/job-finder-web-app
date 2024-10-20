@@ -3,7 +3,7 @@ import { AiOutlineClose } from "react-icons/ai"; // Import a close icon from rea
 import styles from "./skillsInput.module.css"
 
 export default function SkillsInput  ({id, onChange, data, skillStyle}) {
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState(data);
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {

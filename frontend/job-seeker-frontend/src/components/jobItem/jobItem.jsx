@@ -12,6 +12,12 @@ export default function JobItem({data}) {
             navigate(`/login`)
         }
     }
+
+    const onEditClick = () => {
+        if(tokenAvailable()) {    
+            navigate(`/editjob/${data?._id}`)
+        }
+    }
     return (
         <div className={styles.container}>
             <img className={styles.logo} src={data?.logo} alt={data?.name}/>
@@ -30,7 +36,7 @@ export default function JobItem({data}) {
                     })}
                 </div>
                 <div className={styles.buttonContainer}>
-                    {isEditable(data?.creator) && <button className={styles.editButton}>Edit Job</button>}
+                    {isEditable(data?.creator) && <button className={styles.editButton} onClick={onEditClick}>Edit Job</button>}
                     <button className={styles.viewButton} onClick={onViewClick}>View Details</button>
                 </div>
             </div>

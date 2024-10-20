@@ -3,12 +3,11 @@ import Form from "../../components/form/form"
 import addJobImage from "../../assets/add_job_image.png"
 import { useNavigate} from "react-router-dom"
 import styles from "./addJob.module.css"
-import SkillsInput from "../../components/skillsInput/skillsInput"
-import { addJob } from "../../services/jobs"
+import { addJob, editJob } from "../../services/jobs"
 
-export default function AddJob(){
+export default function AddJob({id, edit, data}){
     const navigate = useNavigate()
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState(!edit ? {
         name: "",
         logo: "",
         position: "",
@@ -20,7 +19,7 @@ export default function AddJob(){
         skills: [],
         information: "",
         creator: "",
-    })
+    }: {...data, skills: Object.values(data.skills)})
 
     const [error, setError] = useState({
         name: false,
@@ -225,7 +224,6 @@ export default function AddJob(){
     ]
     
     const onSubmit = async(e) => {
-        //set cretor befor submit
         e.preventDefault()
         let isError = false
         Object.keys(errorMessages).map((key) => {
@@ -238,8 +236,13 @@ export default function AddJob(){
             let jobData = formData
             jobData.remote = jobData.remote == "Remote" ? true : false
             console.log(jobData)
-            const res = await addJob(jobData)
-            console.log(res)
+            let res;
+            if(edit) {
+                res = await editJob(id, jobData)
+            } else {
+                res = await addJob(jobData)
+            }
+            
             if(res.status == 200) {
                 alert(res.data.message)
                 navigate('/')
