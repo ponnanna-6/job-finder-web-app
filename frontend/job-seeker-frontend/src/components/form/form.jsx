@@ -7,7 +7,7 @@ function FormField({ value, name, placeholder, options, label, type, onChange}) 
             {label ? (<label id={name} htmlFor={name} className={styles.labelStyle}>{label}</label>) : null}
             {type == "dropdown" 
                 ? 
-                    <select placeholder={placeholder} onChange={onChange}>
+                    <select value={value} placeholder={placeholder} onChange={onChange} className={styles.dropdownStyle}>
                         <option value="" disabled>{placeholder}</option>
                         {options?.map((option, index) => (
                             <option key={index} value={option}>{option}</option>
@@ -16,7 +16,7 @@ function FormField({ value, name, placeholder, options, label, type, onChange}) 
               
                 : type == "skills" 
                     ?
-                        <SkillsInput onChange={onChange} data={value}/>
+                        <SkillsInput id={name} onChange={onChange} data={value} skillStyle={styles.inputStyle}/>
                     : 
                         <input
                             id={name}
@@ -51,7 +51,7 @@ export default function Form({ formFields, error, errorMessages, onSubmit, submi
                     )}
                 </div>
             ))}
-            <div className=''>
+            <div className={styles.buttonContainer}>
                 {cancelButton && <button className={styles.cancelButton} type="button" onClick={onCancel}>{cancelButton}</button>}
                 {submitButton && <button className={styles.finalButton} type="submit">{submitButton}</button>}
             </div>

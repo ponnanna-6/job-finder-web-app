@@ -1,0 +1,12 @@
+.skillContainer {
+    display: flex;
+    align-self: flex-start;
+    height: auto;
+    width: 30vw;
+    flex-direction: column;
+}
+
+.skillRow {
+    display: flex;
+    flex-direction: row ;
+}

@@ -4,6 +4,7 @@ import addJobImage from "../../assets/add_job_image.png"
 import { useNavigate} from "react-router-dom"
 import styles from "./addJob.module.css"
 import SkillsInput from "../../components/skillsInput/skillsInput"
+import { addJob } from "../../services/jobs"
 
 export default function AddJob(){
     const navigate = useNavigate()
@@ -73,7 +74,7 @@ export default function AddJob(){
         },
         remote: {
             message: "Please select remote/office",
-            isValid: typeof formData.remote === 'boolean',
+            isValid: formData.remote.length > 0,
             onError: () => {
                 setError((error)=>({...error, remote: true}))
             }
@@ -90,6 +91,13 @@ export default function AddJob(){
             isValid: formData.description.length > 0,
             onError: () => {
                 setError((error)=>({...error, description: true}))
+            }
+        },
+        skills: {
+            message: "Please enter required skills",
+            isValid: formData.skills.length > 0,
+            onError: () => {
+                setError((error)=>({...error, skills: true}))
             }
         },
         information: {
@@ -166,7 +174,7 @@ export default function AddJob(){
             value: formData.remote,
             label: "Remote/Office",
             onChange: (e) => {
-                setFormData({...formData, remote: e.target.value == "Remote" ? true : false})
+                setFormData({...formData, remote: e.target.value})
                 setError((error)=>({...error, remote: false}))
             }
         },
@@ -219,7 +227,6 @@ export default function AddJob(){
     const onSubmit = async(e) => {
         //set cretor befor submit
         e.preventDefault()
-        console.log("SUBMIT CLICKED", formData)
         let isError = false
         Object.keys(errorMessages).map((key) => {
             if(!errorMessages[key].isValid) {
@@ -228,18 +235,17 @@ export default function AddJob(){
             }
         })
         if(!isError){
-            console.log("NO ERRORS")
-            // const res = await loginUser({
-            //     email: formData.email,
-            //     password: formData.password
-            // })
-            // if(res.status == 200) {
-            //     alert(res.data.message)
-            //     localStorage.setItem('token', res.data.token)
-            //     navigate('/')
-            // } else{
-            //     alert(res.message)
-            // }
+            let jobData = formData
+            jobData.remote = jobData.remote == "Remote" ? true : false
+            console.log(jobData)
+            const res = await addJob(jobData)
+            console.log(res)
+            if(res.status == 200) {
+                alert(res.data.message)
+                navigate('/')
+            } else{
+                alert(res.message)
+            }
         } else {
             console.log(error)
         }
@@ -253,7 +259,7 @@ export default function AddJob(){
     return(
         <div className={styles.container}>
             <div className={styles.container1}>
-                <p>Add job description</p>
+                <p className={styles.heading}>Add job description</p>
                 <Form
                     formFields={formFields}
                     error={error}

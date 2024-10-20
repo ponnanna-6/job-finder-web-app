@@ -22,7 +22,7 @@ const jobSchema = new schema({
     jobType: {
         type: String,
         required: true,
-        enum : ["full-time", "part-time", "contract", "internship"]
+        enum : ["Internship", "Full-Time", "Part-Time"]
     },
     remote: {
         type: Boolean,

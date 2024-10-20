@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai"; // Import a close icon from react-icons
+import styles from "./skillsInput.module.css"
 
-export default function SkillsInput  ({onChange, value}) {
+export default function SkillsInput  ({id, onChange, data, skillStyle}) {
   const [skills, setSkills] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -27,22 +28,18 @@ export default function SkillsInput  ({onChange, value}) {
   };
 
   return (
-    <div style={{ margin: "20px" }}>
+    <div id={id} className={styles.skillContainer}>
       <input
+        id={id}
         type="text"
         value={inputValue}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
         placeholder="Enter a skill and press Enter"
-        style={{
-          padding: "10px",
-          width: "300px",
-          border: "1px solid #ccc",
-          borderRadius: "5px"
-        }}
+        className={skillStyle}
       />
 
-      <div style={{ marginTop: "10px" }}>
+      <div className={styles.skillRow}>
         {skills.map((skill, index) => (
           <div
             key={index}
@@ -50,7 +47,7 @@ export default function SkillsInput  ({onChange, value}) {
               display: "inline-flex",
               alignItems: "center",
               margin: "5px",
-              padding: "5px 10px",
+              padding: "3px 5px",
               backgroundColor: "#f1f1f1",
               borderRadius: "20px",
               fontSize: "14px"
