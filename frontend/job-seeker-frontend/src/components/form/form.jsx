@@ -4,31 +4,61 @@ import styles from './form.module.css'
 function FormField({ value, name, placeholder, options, label, type, onChange}) {
     return (
         <div className={styles.formFieldContainer}>
-            {label ? (<label id={name} htmlFor={name} className={styles.labelStyle}>{label}</label>) : null}
-            {type == "dropdown" 
-                ? 
-                    <select value={value} placeholder={placeholder} onChange={onChange} className={styles.dropdownStyle}>
-                        <option value="" disabled>{placeholder}</option>
-                        {options?.map((option, index) => (
-                            <option key={index} value={option}>{option}</option>
-                        ))}
-                    </select>
-              
-                : type == "skills" 
-                    ?
-                        <SkillsInput id={name} onChange={onChange} data={value} skillStyle={styles.inputStyle}/>
-                    : 
-                        <input
-                            id={name}
-                            value={value}
-                            name={name}
-                            placeholder={placeholder}
-                            type={type}
-                            onChange={onChange}
-                            className={styles.inputStyle}
-                        />
-                }
+            {type !== "checkbox" && label && (
+                <label id={name} htmlFor={name} className={styles.labelStyle}>
+                    {label}
+                </label>
+            )}
+            {type === "dropdown" ? (
+                <select
+                    value={value}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    className={styles.dropdownStyle}
+                >
+                    <option value="" disabled>{placeholder}</option>
+                    {options?.map((option, index) => (
+                        <option key={index} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
+            ) : type === "skills" ? (
+                <SkillsInput
+                    id={name}
+                    onChange={onChange}
+                    data={value}
+                    skillStyle={styles.inputStyle}
+                />
+            ) : type === "checkbox" ? (
+                <>
+                    <input
+                        id={name}
+                        type="checkbox"
+                        checked={value}
+                        name={name}
+                        onChange={onChange}
+                        className={styles.checkboxStyle}
+                    />
+                    {label && (
+                        <label id={name} htmlFor={name} className={styles.checkBoxlabelStyle}>
+                            {label}
+                        </label>
+                    )}
+                </>
+            ) : (
+                <input
+                    id={name}
+                    value={value}
+                    name={name}
+                    placeholder={placeholder}
+                    type={type}
+                    onChange={onChange}
+                    className={styles.inputStyle}
+                />
+            )}
         </div>
+
     );
 }
 

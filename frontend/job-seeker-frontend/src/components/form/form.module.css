@@ -40,6 +40,18 @@
     align-items: center;
 }
 
+.checkBoxlabelStyle {
+    display: flex;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-align: left;
+    color: #525252;
+    width: auto;
+    align-items: center;
+    margin: 0.3rem;
+}
+
 .errorStyle {
     font-size: 0.6rem;
     font-weight: 700;

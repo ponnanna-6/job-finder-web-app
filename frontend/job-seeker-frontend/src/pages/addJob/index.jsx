@@ -19,7 +19,7 @@ export default function AddJob({id, edit, data}){
         skills: [],
         information: "",
         creator: "",
-    }: {...data, skills: Object.values(data.skills)})
+    }: {...data, remote: data?.remote ? "Remote" : "Office", skills: Object.values(data.skills)})
 
     const [error, setError] = useState({
         name: false,
@@ -245,9 +245,10 @@ export default function AddJob({id, edit, data}){
             
             if(res.status == 200) {
                 alert(res.data.message)
-                navigate('/')
+                navigate('/list')
             } else{
                 alert(res.message)
+                navigate('/list')
             }
         } else {
             console.log(error)
@@ -262,7 +263,9 @@ export default function AddJob({id, edit, data}){
     return(
         <div className={styles.container}>
             <div className={styles.container1}>
-                <p className={styles.heading}>Add job description</p>
+                {edit 
+                    ? <p className={styles.heading}>Edit job description</p> 
+                    : <p className={styles.heading}>Add job description</p>}
                 <Form
                     formFields={formFields}
                     error={error}
@@ -274,7 +277,7 @@ export default function AddJob({id, edit, data}){
                 />
             </div>
             <div className={styles.container2}>
-                <p className={styles.imageTextStyle}>Recruiter add job details here</p>
+                <p className={styles.imageTextStyle}>{`Recruiter ${edit ? "edit" : "add"} job details here`}</p>
                 <img src={addJobImage} alt="Image" className={styles.imageStyle}/>
             </div>
         </div>

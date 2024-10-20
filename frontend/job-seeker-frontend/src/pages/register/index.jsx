@@ -3,6 +3,7 @@ import Form from "../../components/form/form"
 import jobImage from "../../assets/job_finder_image.png"
 import { registerUser } from "../../services/auth";
 import {useNavigate} from "react-router-dom"
+import styles from './register.module.css'
 
 export default function Register(){
     const navigate = useNavigate()
@@ -156,24 +157,27 @@ export default function Register(){
     }
 
     return(
-        <div style={{flexDirection: 'row', display: 'flex'}}>
-            <div style={{ width: '50vw', height: '100vh', marginLeft: "50px"}}>
-                <p>Create an account</p>
-                <p>Your personal job finder</p>
-                <Form
-                    formFields={formFields}
-                    error={error}
-                    errorMessages={errorMessages}
-                    onSubmit={onSubmit}
-                />
-                <p>
-                    Already have an account? 
-                    <b><u onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>
-                        Sign in
-                    </u></b>
-                </p>
+        <div className={styles.container}>
+            <div className={styles.container2}>
+                <p className={styles.bigTextStyle}>Create an account</p>
+                <p className={styles.mediumTextStyle}>Your personal job finder</p>
+                <div className={styles.formDiv}>
+                    <Form
+                        formFields={formFields}
+                        error={error}
+                        errorMessages={errorMessages}
+                        onSubmit={onSubmit}
+                        submitButton={"Register"}
+                    />
+                    <p className={styles.mediumTextStyle}>
+                        Already have an account?&nbsp;
+                        <b><u onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>
+                            Sign in
+                        </u></b>
+                    </p>
+                </div>
             </div>
-            <img src={jobImage} alt="Image" style={{ width: '50vw', height: '100vh' }}/>
+            <img src={jobImage} alt="Image" className={styles.imageStyle}/>
         </div>
     )
 }
