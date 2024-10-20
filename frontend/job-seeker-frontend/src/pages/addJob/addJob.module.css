@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container1 {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.container2 {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.imageStyle {
+    width: 50vw;
+    height: 100vh;
+}
+
+.imageTextStyle {
+    position: absolute;
+    top: 10;
+    right: 0;
+    left: 0;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 2rem;
+}

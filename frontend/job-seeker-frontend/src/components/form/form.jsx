@@ -1,39 +1,60 @@
-function FormField({ value, name, placeholder, label, type, onChange }) {
+import SkillsInput from '../skillsInput/skillsInput';
+import styles from './form.module.css'
+
+function FormField({ value, name, placeholder, options, label, type, onChange}) {
     return (
-        <div style={{display:'flex',flexDirection:"row"}}>
-            <input
-                id={name}
-                value={value}
-                name={name}
-                placeholder={placeholder}
-                type={type}
-                onChange={onChange}
-                style={{height:"20px", marginBottom: "10px"}}
-            />
-            {label ? (<label id={name} htmlFor={name}>{label}</label>) : null}
+        <div className={styles.formFieldContainer}>
+            {label ? (<label id={name} htmlFor={name} className={styles.labelStyle}>{label}</label>) : null}
+            {type == "dropdown" 
+                ? 
+                    <select placeholder={placeholder} onChange={onChange}>
+                        <option value="" disabled>{placeholder}</option>
+                        {options?.map((option, index) => (
+                            <option key={index} value={option}>{option}</option>
+                        ))}
+                    </select>
+              
+                : type == "skills" 
+                    ?
+                        <SkillsInput onChange={onChange} data={value}/>
+                    : 
+                        <input
+                            id={name}
+                            value={value}
+                            name={name}
+                            placeholder={placeholder}
+                            type={type}
+                            onChange={onChange}
+                            className={styles.inputStyle}
+                        />
+                }
         </div>
     );
 }
 
-export default function Form({ formFields, error, errorMessages, onSubmit }) {
+export default function Form({ formFields, error, errorMessages, onSubmit, submitButton, cancelButton, onCancel}) {
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className={styles.container}>
             {formFields.map((item, index) => (
-                <div key={index}>
+                <div key={index} className={styles.itemDiv}>
                     <FormField
                         value={item.value}
                         name={item.name}
                         placeholder={item.placeholder}
+                        options={item.options}
                         label={item.label}
                         type={item.type}
                         onChange={item.onChange}
                     />
                     {error[item.name] && (
-                        <p style={{ color: "red" }}>{errorMessages[item.name].message}</p>
+                        <p className={styles.errorStyle}>{errorMessages[item.name].message}</p>
                     )}
                 </div>
             ))}
-            <button type="submit">Submit</button>
+            <div className=''>
+                {cancelButton && <button className={styles.cancelButton} type="button" onClick={onCancel}>{cancelButton}</button>}
+                {submitButton && <button className={styles.finalButton} type="submit">{submitButton}</button>}
+            </div>
         </form>
     );
 }

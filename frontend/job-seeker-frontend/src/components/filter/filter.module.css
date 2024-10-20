@@ -65,6 +65,22 @@
     border-color: transparent;
 }
 
+.addJobButton {
+    width: 100px;
+    justify-content: flex-end;
+    margin-left: auto;
+    color: var(--primary-color);
+    cursor: pointer;
+    border-color: transparent;
+    border-radius: 10px;
+    border: 2px solid var(--primary-color);
+}
+
+.addJobButton:hover {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+}
+
 .clearButton {
     width: 100px;
     margin-left: 1rem;

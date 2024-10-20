@@ -1,0 +1,71 @@
+.container {
+    
+}
+
+.itemDiv {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+} 
+
+.formFieldContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.inputStyle {
+    height: 30px;
+    width: 40vw;
+    margin-bottom: 10px;
+}
+
+.labelStyle {
+    font-size: 1rem;
+    width: auto;
+}
+
+.errorStyle {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: red;
+}
+
+.buttonConatiner { 
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+}
+
+.cancelButton {
+    width: 100px;
+    margin-left: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: var(--primary-color);
+    cursor: pointer;
+    align-items: center;
+    font-size: 1.2rem;
+    border: 0px;
+    background-color: #FFFFFF;
+}
+
+.cancelButton:hover {
+    text-decoration: underline;
+}
+
+.finalButton {
+    width: 100px;
+    justify-content: flex-end;
+    margin-left: auto;
+    color: var(--primary-color);
+    cursor: pointer;
+    border-color: transparent;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    font-size: 1.2rem;
+}
+
+.finalButton:hover {
+    border: 2px solid red;
+}
