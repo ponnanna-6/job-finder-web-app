@@ -11,16 +11,26 @@ export default function JobsList(){
     const navigate = useNavigate()
     const [jobData, setJobData] = useState([]);
     const [loading, setLoading] = useState(true)
+    const [clear, setClear] = useState(false)
 
     useEffect(() => {
-        const getData = async() => {
-            await getAllJobData().then(res => {
-                setJobData(res)
-                setLoading(false)
-            });
-        }
         getData()
     }, []);
+
+    useEffect(() => {
+        if(clear) {  
+            getData()
+            setClear(false)
+        }
+    }, [clear]);
+
+    
+    const getData = async() => {
+        await getAllJobData().then(res => {
+            setJobData(res)
+            setLoading(false)
+        });
+    }
 
     const handleLogout = () => {
         navigate('/login')
@@ -39,7 +49,11 @@ export default function JobsList(){
                         handleRegister={()=>{navigate('/register')}}
                     />
                     <div className={styles.filterParent}>
-                        <FilterComponent/>
+                        <FilterComponent 
+                            setJobData={setJobData}
+                            setLoading={setLoading}
+                            setClear={setClear}
+                        />
                     </div>
                     <div className={styles.parent}>
                         {Object.keys(jobData).map((index, key) => {

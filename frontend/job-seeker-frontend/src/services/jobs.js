@@ -45,4 +45,12 @@ export const editJob = async (id, data) => {
   );
   return res.data
 };
+
+export const getJobBySearch = async (data) => {
+  const headers = addTokenToHeader({headers:{}})
+  const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/job/search/${data}`, 
+    {headers}
+  );
+  return res.data
+};
   
